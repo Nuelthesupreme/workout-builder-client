@@ -1,26 +1,29 @@
 import React, { useState } from "react";
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import "./App.css";
 
 import Routes from "./Routes";
+import Navigation from "./components/Navigation";
 
-import UserContext from "./context//UserContext";
+import UserContext from "./context/UserContext";
 
 const App = () => {
   const [user, setUser] = useState({});
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
-      <Container
-        className="App"
-        style={{ height: "calc(100vh - 40px - 16px)" }}
-      >
-        <HashRouter>
+    <HashRouter>
+      <UserContext.Provider value={{ user, setUser }}>
+        <Container
+          className="App"
+          style={{ height: "calc(100vh - 40px - 16px)" }}
+        >
+          <Navigation />
+
           <Routes />
-        </HashRouter>
-      </Container>
-    </UserContext.Provider>
+        </Container>
+      </UserContext.Provider>
+    </HashRouter>
   );
 };
 
