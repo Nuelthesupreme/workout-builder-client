@@ -1,25 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, createContext } from "react";
+import {BrowserRouter as HashRouter, Router, Route} from 'react-router-dom'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { Container } from 'react-bootstrap';
 
-function App() {
+
+import Login from "./Login";
+import SignUp from "./Signup";
+
+export const AppContext = createContext();
+
+
+
+function App () {
+  const [user, setUser] = useState({});
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HashRouter>
+      <AppContext.Provider value={{ user, setUser }}>
+       <Container className="App">
+      <Container style={{height: 'calc(100vh - 40px - 16px)'}}>
+        <Router>
+          <Route exact path='/' render={props => <Homepage />} />
+          <Route exact path='/build' render={props => <ExerciseBuilder />} />
+          <Route exact path='/login' render={props => <Login />} />
+          <Route exact path='/sogin' render={props => <SignUp />} />
+        </Router>
+      </Container>
+    </Container>
+    </AppContext.Provider>
+    </HashRouter>
+     
   );
 }
 
