@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import { LOGIN_URL } from "../api/constants";
 
@@ -64,13 +65,11 @@ const Login = () => {
           />
         </div>
 
-        <button
-          type="submit"
-          onClick={onSubmit}
-          className="btn btn-Dark btn-block"
-        >
-          Submit
-        </button>
+        <Link to="/homepage">
+          <button onClick={onSubmit} className="btn btn-Dark btn-block">
+            Submit
+          </button>
+        </Link>
       </form>
       {statusMessage && <small>{statusMessage}</small>}
     </>

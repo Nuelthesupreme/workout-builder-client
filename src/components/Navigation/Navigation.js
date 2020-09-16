@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import "./Navigation.css"; // Example import
 
 const Navigation = () => {
   const linkStyleOverride = { color: "black" };
@@ -26,6 +27,12 @@ const Navigation = () => {
           <Nav.Link>
             <NavLink activeStyle={linkStyleOverride} to="/signup">
               Signup
+            </NavLink>
+          </Nav.Link>
+
+          <Nav.Link>
+            <NavLink activeStyle={linkStyleOverride} to="/homepage">
+              Homepage
             </NavLink>
           </Nav.Link>
         </Nav>

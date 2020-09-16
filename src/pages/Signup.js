@@ -11,11 +11,11 @@ const Signup = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
-  const OnFirstNameChange = (event) => {
+  const onFirstNameChange = (event) => {
     setFirstName(event.target.value);
   };
 
-  const OnLastNameChange = (event) => {
+  const onLastNameChange = (event) => {
     setLastName(event.target.value);
   };
 
@@ -54,7 +54,7 @@ const Signup = () => {
           <input
             type="text"
             value={firstName}
-            onChange={OnFirstNameChange}
+            onChange={onFirstNameChange}
             className="form-control"
             placeholder="First name"
           />
@@ -65,7 +65,7 @@ const Signup = () => {
           <input
             type="text"
             value={lastName}
-            onChange={OnLastNameChange}
+            onChange={onLastNameChange}
             className="form-control"
             placeholder="Last name"
           />

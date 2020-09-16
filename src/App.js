@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 import "./App.css";
 
 import Routes from "./Routes";
-import Navigation from "./components/Navigation";
+import Navigation from "./components/Navigation/Navigation";
 
 import UserContext from "./context/UserContext";
 
