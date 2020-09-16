@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import UserContext from "../UserContext";
+import UserContext from "../context/UserContext";
 import { LOGIN_URL } from "../api/constants";
 
 const Login = () => {
