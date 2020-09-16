@@ -1,36 +1,30 @@
-import React, { useState, createContext } from "react";
-import {BrowserRouter as HashRouter, Router, Route} from 'react-router-dom'
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import { Container } from 'react-bootstrap';
+import React, { useState } from "react";
+import { HashRouter, Route } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import "./App.css";
 
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
-import Login from "./Login";
-import SignUp from "./Signup";
+import UserContext from "./UserContext";
 
-export const AppContext = createContext();
-
-
-
-function App () {
+const App = () => {
   const [user, setUser] = useState({});
+
   return (
-    <HashRouter>
-      <AppContext.Provider value={{ user, setUser }}>
-       <Container className="App">
-      <Container style={{height: 'calc(100vh - 40px - 16px)'}}>
-        <Router>
-          <Route exact path='/' render={props => <Homepage />} />
-          <Route exact path='/build' render={props => <ExerciseBuilder />} />
-          <Route exact path='/login' render={props => <Login />} />
-          <Route exact path='/sogin' render={props => <SignUp />} />
-        </Router>
+    <UserContext.Provider value={{ user, setUser }}>
+      <Container
+        className="App"
+        style={{ height: "calc(100vh - 40px - 16px)" }}
+      >
+        <HashRouter>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+        </HashRouter>
       </Container>
-    </Container>
-    </AppContext.Provider>
-    </HashRouter>
-     
+    </UserContext.Provider>
   );
-}
+};
 
 export default App;

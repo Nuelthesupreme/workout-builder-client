@@ -1,9 +1,9 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-//import { Link } from "react-router-dom";
-import { REGISTER_URL } from "../api/constants";
+import { Link } from "react-router-dom";
+import { SIGNUP_URL } from "../api/constants";
 
-export const Register = () => {
+const Signup = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,7 +18,6 @@ export const Register = () => {
   const OnLastNameChange = (event) => {
     setLastName(event.target.value);
   };
-
 
   const onEmailChange = (event) => {
     setEmail(event.target.value);
@@ -52,27 +51,56 @@ export const Register = () => {
 
         <div className="form-group">
           <label>First name</label>
-          <input type="text" value={firstName} onChange={OnFirstNameChange} className="form-control" placeholder="First name" />
+          <input
+            type="text"
+            value={firstName}
+            onChange={OnFirstNameChange}
+            className="form-control"
+            placeholder="First name"
+          />
         </div>
 
         <div className="form-group">
           <label>Last name</label>
-          <input type="text" value={lastName} onChange={OnLastNameChange} className="form-control" placeholder="Last name" />
+          <input
+            type="text"
+            value={lastName}
+            onChange={OnLastNameChange}
+            className="form-control"
+            placeholder="Last name"
+          />
         </div>
 
         <div className="form-group">
           <label>Email address</label>
-          <input type="email" value={email} onChange={onEmailChange} className="form-control" placeholder="Enter email" />
+          <input
+            type="email"
+            value={email}
+            onChange={onEmailChange}
+            className="form-control"
+            placeholder="Enter email"
+          />
         </div>
 
         <div className="form-group">
           <label>Password</label>
-          <input type="password" value={password} onChange={onPasswordChange} className="form-control" placeholder="Enter password" />
+          <input
+            type="password"
+            value={password}
+            onChange={onPasswordChange}
+            className="form-control"
+            placeholder="Enter password"
+          />
         </div>
 
-        <button type="submit" onClick={onSubmit} className="btn btn-Dark btn-block">Sign Up</button>
-        <p className="forgot-password text-right">
-        </p>
+        <button
+          type="submit"
+          onClick={onSubmit}
+          className="btn btn-Dark btn-block"
+        >
+          Sign Up
+        </button>
+        <p className="forgot-password text-right"></p>
       </form>
       {statusMessage && <small>{statusMessage}</small>}
       <div>
@@ -81,3 +109,5 @@ export const Register = () => {
     </>
   );
 };
+
+export default Signup;

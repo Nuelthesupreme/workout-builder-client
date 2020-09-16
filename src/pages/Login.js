@@ -1,11 +1,10 @@
-import React, { Component, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
-import { AppContext } from "./App";
-//import { Link } from "react-router-dom";
+import UserContext from "../UserContext";
 import { LOGIN_URL } from "../api/constants";
 
 const Login = () => {
-  const { setUser } = useContext(AppContext);
+  const { setUser } = useContext(UserContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,22 +44,37 @@ const Login = () => {
 
         <div className="form-group">
           <label>Email address</label>
-          <input type="email" value={email} onChange={onEmailChange} className="form-control" placeholder="Enter email" />
+          <input
+            type="email"
+            value={email}
+            onChange={onEmailChange}
+            className="form-control"
+            placeholder="Enter email"
+          />
         </div>
 
         <div className="form-group">
           <label>Password</label>
-          <input type="password" value={password} onChange={onPasswordChange} className="form-control" placeholder="Enter password" />
+          <input
+            type="password"
+            value={password}
+            onChange={onPasswordChange}
+            className="form-control"
+            placeholder="Enter password"
+          />
         </div>
 
-        <button type="submit" onClick={onSubmit} className="btn btn-Dark btn-block">Submit</button>
-
+        <button
+          type="submit"
+          onClick={onSubmit}
+          className="btn btn-Dark btn-block"
+        >
+          Submit
+        </button>
       </form>
       {statusMessage && <small>{statusMessage}</small>}
     </>
-
   );
 };
 
 export default Login;
-
