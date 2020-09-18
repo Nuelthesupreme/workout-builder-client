@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { HashRouter } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import "./App.css";
 
-function App() {
+import Routes from "./Routes";
+import Navigation from "./components/Navigation/Navigation";
+
+import UserContext from "./context/UserContext";
+
+const App = () => {
+  const [user, setUser] = useState({});
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <HashRouter>
+      <UserContext.Provider value={{ user, setUser }}>
+        <Container
+          className="App"
+          style={{ height: "calc(100vh - 40px - 16px)" }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Navigation />
+
+          <Routes />
+        </Container>
+      </UserContext.Provider>
+    </HashRouter>
   );
-}
+};
 
 export default App;
