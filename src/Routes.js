@@ -5,19 +5,23 @@ import UserContext from "./context/UserContext";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Workouts from "./pages/Workouts";
 
 const Routes = () => {
   const { user } = useContext(UserContext);
   return (
     <Switch>
-      <Route path="/login">
+      <Route exact path="/login">
         {user.token ? <Redirect to="/dashboard" /> : <Login />}
       </Route>
-      <Route path="/register">
+      <Route exact path="/register">
         {user.token ? <Redirect to="/login" /> : <Register />}
       </Route>
-      <Route path="/dashboard">
+      <Route exact path="/dashboard">
         {user.token ? <Dashboard /> : <Redirect to="/login" />}
+      </Route>
+      <Route exact path="/workouts">
+        {user.token ? <Workouts /> : <Redirect to="/login" />}
       </Route>
     </Switch>
   );

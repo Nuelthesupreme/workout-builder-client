@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Nav from "react-bootstrap/esm/Nav";
 import Navbar from "react-bootstrap/esm/Navbar";
-import { Link } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
 
 import UserContext from "../context/UserContext";
 
@@ -10,13 +10,16 @@ const ProtectedRoutes = () => {
 
   return (
     <Navbar bg="dark" variant="dark">
-      <Link to="/dashboard">
+      <LinkContainer to="/dashboard">
         <Navbar.Brand>Workout-Tracker</Navbar.Brand>
-      </Link>
+      </LinkContainer>
       <Nav className="mr-auto">
-        <Link to="/dashboard">
+        <LinkContainer to="/dashboard">
           <Nav.Link>Dashboard</Nav.Link>
-        </Link>
+        </LinkContainer>
+        <LinkContainer to="/workouts">
+          <Nav.Link>Workouts</Nav.Link>
+        </LinkContainer>
         <Nav.Link onClick={() => setUser({})}>Logout</Nav.Link>
       </Nav>
     </Navbar>
