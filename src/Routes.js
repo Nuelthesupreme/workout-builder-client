@@ -6,7 +6,8 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Workouts from "./pages/Workouts";
-import Library from "./pages/Library";
+import ExerciseBuilder from "./pages/ExerciseBuilder";
+import Homepage from "./pages/HomePage";
 
 const Routes = () => {
   const { user } = useContext(UserContext);
@@ -24,7 +25,10 @@ const Routes = () => {
       <Route exact path="/workouts">
         {user.token ? <Workouts /> : <Redirect to="/login" />}
       </Route>
-      <Route exact path="/library" component={Library} />
+      <Route path="/homepage" exact>
+        {user.token ? <Homepage /> : <Redirect to="/login" />}
+      </Route>
+      <Route exact path="/exerciseBuilder" component={ExerciseBuilder} />
     </Switch>
   );
 };
