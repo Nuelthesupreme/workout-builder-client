@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { HashRouter } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import "./App.css";
+
 
 import Routes from "./Routes";
 import Navigation from "./components/Navigation/Navigation";

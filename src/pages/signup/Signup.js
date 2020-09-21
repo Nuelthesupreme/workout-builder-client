@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { SIGNUP_URL } from "../api/constants";
+import { SIGNUP_URL } from "../../api/constants";
+import "./signup.css";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");

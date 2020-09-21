@@ -14,7 +14,7 @@ const Navigation = () => {
       bg="white"
       variant="light"
     >
-      <Navbar.Brand href="#home">Nuel-James Wrk-Out</Navbar.Brand>
+      <Navbar.Brand href="/homepage">Master Builder</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto">

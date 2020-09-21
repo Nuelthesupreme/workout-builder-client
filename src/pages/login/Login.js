@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import UserContext from "../context/UserContext";
-import { LOGIN_URL } from "../api/constants";
+import UserContext from "../../context/UserContext";
+import { LOGIN_URL } from "../../api/constants";
+import "./login.css";
 
 const Login = () => {
   const { setUser } = useContext(UserContext);
