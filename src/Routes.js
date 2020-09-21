@@ -1,22 +1,27 @@
 import React, { useContext } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Homepage from "./pages/Homepage";
+import { Redirect, Switch, Route } from "react-router-dom";
 
 import UserContext from "./context/UserContext";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import Workouts from "./pages/Workouts";
 
 const Routes = () => {
   const { user } = useContext(UserContext);
-
   return (
     <Switch>
-      <Route exact path="/" component={Login} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/signup" component={Signup} />
-      <Route path="/homepage" exact>
-        {user.token ? <Homepage /> : <Redirect to="/login" />}
+      <Route exact path="/login">
+        {user.token ? <Redirect to="/dashboard" /> : <Login />}
+      </Route>
+      <Route exact path="/register">
+        {user.token ? <Redirect to="/login" /> : <Register />}
+      </Route>
+      <Route exact path="/dashboard">
+        {user.token ? <Dashboard /> : <Redirect to="/login" />}
+      </Route>
+      <Route exact path="/workouts">
+        {user.token ? <Workouts /> : <Redirect to="/login" />}
       </Route>
     </Switch>
   );
