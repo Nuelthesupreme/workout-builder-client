@@ -28,7 +28,7 @@ const Homepage = () => {
 
   return (
     <Container className="h-100">
-      <Row className="align-items-center h-100">
+      <Row className="align-items-center h-100" className="pt-5">
         {exercises.map((exercise) => (
           <Col xs="6" sm="3">
             <TrainingCard {...exercise} />
