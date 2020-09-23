@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export default function TrainingCard({ variant, title }) {
+const TrainingCard = ({ variant, title }) => {
   const style = { height: "400px", backgroundSize: "cover" };
 
   if (title === "Fitness")
@@ -33,4 +33,6 @@ export default function TrainingCard({ variant, title }) {
       </Card.Body>
     </Card>
   );
-}
+};
+
+export default TrainingCard;
