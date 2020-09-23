@@ -15,7 +15,7 @@ const ProtectedRoutes = () => {
       </LinkContainer>
       <Nav className="mr-auto">
         <LinkContainer to="/homepage">
-          <Nav.Link>homepage</Nav.Link>
+          <Nav.Link>Homepage</Nav.Link>
         </LinkContainer>
         <LinkContainer to="/workouts">
           <Nav.Link>Workouts</Nav.Link>

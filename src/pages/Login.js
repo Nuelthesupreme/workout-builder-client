@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -16,6 +17,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const history = useHistory();
 
   const onEmailChange = (event) => {
     setEmail(event.target.value);
@@ -34,6 +37,14 @@ const Login = () => {
       });
 
       setUser(data);
+
+      //Local Storage, this persists the user's email and token
+      const { token } = data;
+      const user = { email, token };
+      localStorage.setItem("user", JSON.stringify(user));
+
+      // Navigate to the homepage.
+      history.push("./homepage");
     } catch (error) {
       setError("Failed to login. Please try again.");
     }

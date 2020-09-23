@@ -26,7 +26,7 @@ const Navigation = () => {
           <Nav.Link>Register</Nav.Link>
         </LinkContainer>
         <LinkContainer to="/exerciseBuilder">
-          <Nav.Link>BuidWorkout</Nav.Link>
+          <Nav.Link>Build Workout</Nav.Link>
         </LinkContainer>
       </Nav>
     </Navbar>

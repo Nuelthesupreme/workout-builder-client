@@ -11,10 +11,14 @@ import Homepage from "./pages/HomePage";
 
 const Routes = () => {
   const { user } = useContext(UserContext);
+
   return (
     <Switch>
+      <Route exact path="/">
+        {user.token ? <Redirect to="/homepage" /> : <Login />}
+      </Route>
       <Route exact path="/login">
-        {user.token ? <Redirect to="/dashboard" /> : <Login />}
+        {user.token ? <Redirect to="/homepage" /> : <Login />}
       </Route>
       <Route exact path="/register">
         {user.token ? <Redirect to="/login" /> : <Register />}
@@ -28,7 +32,6 @@ const Routes = () => {
       <Route path="/homepage" exact>
         {user.token ? <Homepage /> : <Redirect to="/login" />}
       </Route>
-
     </Switch>
   );
 };
