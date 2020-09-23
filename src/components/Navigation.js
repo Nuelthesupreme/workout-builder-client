@@ -25,6 +25,9 @@ const Navigation = () => {
         <LinkContainer to="/register">
           <Nav.Link>Register</Nav.Link>
         </LinkContainer>
+        <LinkContainer to="/exerciseBuilder">
+          <Nav.Link>BuidWorkout</Nav.Link>
+        </LinkContainer>
       </Nav>
     </Navbar>
   );
