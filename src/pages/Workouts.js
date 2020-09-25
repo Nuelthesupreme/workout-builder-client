@@ -11,22 +11,37 @@ const Workouts = ({ title }) => {
 
   const [workouts, setWorkouts] = useState([]);
 
-  const URL = `${BASE_URL}/user/workouts`;
+  const WORKOUTS = `${BASE_URL}/user/workouts`;
+
+  const getWorkouts = async () => {
+    const { data } = await axios.get(WORKOUTS, {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+
+    setWorkouts(data.allWorkouts);
+  };
 
   useEffect(() => {
-    const getWorkouts = async () => {
-      const { data } = await axios.get(URL, {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
-
-      setWorkouts(data.allWorkouts);
-    };
-
     getWorkouts();
   }, []);
-  console.log(workouts);
+
+  const onDelete = async (event) => {
+    const workoutId = event.currentTarget.id;
+    console.log(workoutId);
+
+    const { data } = await axios.delete(`${WORKOUTS}/${workoutId}`, {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+
+    if (data.success) {
+      getWorkouts();
+    }
+  };
+
   if (workouts.length !== 0) {
     return (
       <Row>
@@ -63,15 +78,15 @@ const Workouts = ({ title }) => {
                 </Col>
                 <Col>
                   <Button
-                    as={Link}
+                    id={workout._id}
                     variant="danger"
-                    to="/exercisebuilder"
                     className="mt-auto"
                     style={{
                       padding: "10px",
                       marginLeft: "5px",
                       marginRight: "5px",
                     }}
+                    onClick={onDelete}
                   >
                     Delete Workout
                   </Button>
