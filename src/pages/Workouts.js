@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Spinner, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import { BASE_URL } from "../api/constants";
@@ -11,38 +11,84 @@ const Workouts = ({ title }) => {
 
   const [workouts, setWorkouts] = useState([]);
 
-  const URL = `${BASE_URL}/api/workouts`;
+  const URL = `${BASE_URL}/user/workouts`;
 
   useEffect(() => {
-    const fetchData = async () => {
+    const getWorkouts = async () => {
       const { data } = await axios.get(URL, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       });
-      console.log(data);
+
+      setWorkouts(data.allWorkouts);
     };
 
-    fetchData();
+    getWorkouts();
   }, []);
+  console.log(workouts);
+  if (workouts.length !== 0) {
+    return (
+      <Row>
+        {workouts.map((workout) => {
+          return (
+            <Card
+              key={workout._id}
+              className="text-center"
+              style={{ width: "30%", padding: "15px", margin: "15px" }}
+            >
+              <Card.Title className="mt-auto">{workout.name}</Card.Title>
 
+              {workout.exercises.map((exercise, index) => {
+                return exercise.exercise ? (
+                  <Card.Text key={index}>{exercise.exercise.name}</Card.Text>
+                ) : null;
+              })}
+
+              <Row>
+                <Col>
+                  <Button
+                    as={Link}
+                    variant="dark"
+                    to="/exercisebuilder"
+                    className="mt-auto"
+                    style={{
+                      padding: "10px",
+                      marginLeft: "5px",
+                      marginRight: "5px",
+                    }}
+                  >
+                    View workout
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    as={Link}
+                    variant="danger"
+                    to="/exercisebuilder"
+                    className="mt-auto"
+                    style={{
+                      padding: "10px",
+                      marginLeft: "5px",
+                      marginRight: "5px",
+                    }}
+                  >
+                    Delete Workout
+                  </Button>
+                </Col>
+              </Row>
+            </Card>
+          );
+        })}
+      </Row>
+    );
+  }
   return (
-    <Card className="text-right">
-      <blockquote className="blockquote mb-0 card-body">
-        <Card.Title className="mt-auto text-white">{title}</Card.Title>
-        <footer className="blockquote-footer">
-          <Button
-            as={Link}
-            variant="dark"
-            to="/exercisebuilder"
-            className="mt-auto"
-          >
-            View workout
-        </Button>
-        </footer>
-      </blockquote>
-    </Card>
-  )
+    <Container>
+      <h1>Loading Workouts</h1>
+      <Spinner animation="border" role="status" />
+    </Container>
+  );
 };
 
 export default Workouts;

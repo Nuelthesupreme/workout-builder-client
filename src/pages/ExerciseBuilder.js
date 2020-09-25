@@ -24,44 +24,36 @@ const ExerciseBuilder = () => {
     headers: { Authorization: `Bearer ${authToken}` },
   };
 
-  // Get muscle groups
   useEffect(() => {
+    const getAllMuscleGroups = async () => {
+      const { data } = await axios.get(`${BASE_URL}/api/muscleGroups`, config);
+      setAllMuscleGroups(data);
+    };
     getAllMuscleGroups();
   }, []);
 
-  const getPlanJSON = () => {
-    return JSON.stringify({
-      name: exerciseName,
+  const saveWorkout = (event) => {
+    event.preventDefault();
+
+    const workout = {
+      name: "Workout But Better",
       muscleGroup: selectedMuscleGroup._id,
-      exercisePlans: exercisePlans.map((exercisePlan) => {
+      exercises: exercisePlans.map((exercisePlan) => {
         const { exercise, sets, reps } = exercisePlan;
+
         return {
           exerciseId: exercise
             ? selectedMuscleGroup.exercises[exercise]._id
-            : "",
-          sets,
-          reps,
+            : selectedMuscleGroup.exercises[0]._id,
+          sets: +sets,
+          reps: +reps,
         };
       }),
-    });
-  };
-
-  const getAllMuscleGroups = () => {
-    axios
-      .get(`${BASE_URL}/api/muscleGroups`, config)
-      .then((res) => setAllMuscleGroups(res.data));
-  };
-
-  const handleSaveExercisePlan = (e) => {
-    e.preventDefault();
-
-    const payload = {
-      exercisePlans: getPlanJSON(),
     };
 
-    axios
-      .put(`${BASE_URL}/user/userworkouts`, payload, config)
-      .then(console.log);
+    console.log(workout);
+
+    axios.post(`${BASE_URL}/user/workouts`, workout, config).then(console.log);
   };
 
   const handleAddExercisePlan = (e) => {
@@ -70,11 +62,13 @@ const ExerciseBuilder = () => {
     setExercisePlans([...exercisePlans, createNewExercisePlan()]);
   };
 
-  const handleUpdateExercisePlan = (e, index, prop) => {
-    e.preventDefault();
+  const handleUpdateExercisePlan = (event, index, prop) => {
+    event.preventDefault();
 
     const newExercisePlans = exercisePlans.map((plan) => ({ ...plan }));
-    newExercisePlans[index][prop] = e.target.value;
+
+    newExercisePlans[index][prop] = event.target.value;
+
     setExercisePlans(newExercisePlans);
   };
 
@@ -109,7 +103,9 @@ const ExerciseBuilder = () => {
                     onChange={(e) => setMuscleGroup(e.target.value)}
                     custom
                   >
-                    <option value="">Choose muscle group</option>
+                    <option value="" disabled hidden>
+                      Choose muscle group
+                    </option>
                     {allMuscleGroups.map((muscleGroup, index) => (
                       <option key={index} value={index}>
                         {muscleGroup.name}
@@ -131,12 +127,15 @@ const ExerciseBuilder = () => {
                         <Form.Control
                           as="select"
                           value={exercisePlan.exercise}
-                          onChange={(e) =>
-                            handleUpdateExercisePlan(e, index, "exercise")
+                          onChange={(event) =>
+                            handleUpdateExercisePlan(event, index, "exercise")
                           }
+                          placeholder="Choose exercise"
                           custom
                         >
-                          <option value="">Choose exercise</option>
+                          <option value="" disabled hidden>
+                            Choose exercise
+                          </option>
                           {selectedMuscleGroup.exercises.map(
                             (exercise, index) => (
                               <option key={index} value={index}>
@@ -181,7 +180,7 @@ const ExerciseBuilder = () => {
                     onClick={handleAddExercisePlan}
                     disabled={!!!muscleGroup}
                   >
-                    Add exercise plan
+                    Add exercise
                   </Button>
                   <Button
                     variant="success"
@@ -234,11 +233,7 @@ const ExerciseBuilder = () => {
               ))}
             </Row>
 
-            <Button
-              variant="dark"
-              onClick={handleSaveExercisePlan}
-              className="mr-2 mb-2"
-            >
+            <Button variant="dark" onClick={saveWorkout} className="mr-2 mb-2">
               Save
             </Button>
             <Button
@@ -247,9 +242,6 @@ const ExerciseBuilder = () => {
               className="mr-2 mb-2"
             >
               Edit
-            </Button>
-            <Button variant="dark" className="mr-2 mb-2">
-              Delete
             </Button>
           </Card.Body>
         </Card>
