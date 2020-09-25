@@ -10,12 +10,12 @@ const ProtectedRoutes = () => {
 
   return (
     <Navbar bg="dark" variant="dark">
-      <LinkContainer to="/dashboard">
+      <LinkContainer to="/homepage">
         <Navbar.Brand>Workout-Tracker</Navbar.Brand>
       </LinkContainer>
       <Nav className="mr-auto">
-        <LinkContainer to="/dashboard">
-          <Nav.Link>Dashboard</Nav.Link>
+        <LinkContainer to="/homepage">
+          <Nav.Link>Homepage</Nav.Link>
         </LinkContainer>
         <LinkContainer to="/workouts">
           <Nav.Link>Workouts</Nav.Link>

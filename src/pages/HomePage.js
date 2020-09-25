@@ -27,8 +27,8 @@ const Homepage = () => {
   ];
 
   return (
-    <Container className="h-100">
-      <Row className="align-items-center h-100">
+    <Container style={{ height: "100vh" }}>
+      <Row className="align-items-center justify-content-center h-100">
         {exercises.map((exercise) => (
           <Col xs="6" sm="3">
             <TrainingCard {...exercise} />
