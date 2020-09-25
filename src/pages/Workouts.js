@@ -29,7 +29,6 @@ const Workouts = ({ title }) => {
 
   const onDelete = async (event) => {
     const workoutId = event.currentTarget.id;
-    console.log(workoutId);
 
     const { data } = await axios.delete(`${WORKOUTS}/${workoutId}`, {
       headers: {
@@ -65,7 +64,7 @@ const Workouts = ({ title }) => {
                   <Button
                     as={Link}
                     variant="dark"
-                    to="/exercisebuilder"
+                    to={`/view-workouts/${workout._id}`}
                     className="mt-auto"
                     style={{
                       padding: "10px",
