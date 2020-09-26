@@ -16,7 +16,7 @@ const Navigation = () => {
   return (
     <Navbar bg="dark" variant="dark">
       <LinkContainer to="/login">
-        <Navbar.Brand>Workout-Tracker</Navbar.Brand>
+        <Navbar.Brand>Workout-Builder</Navbar.Brand>
       </LinkContainer>
       <Nav className="justify-content-end" style={{ width: "100%" }}>
         <LinkContainer to="/login">
